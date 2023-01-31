@@ -1,0 +1,73 @@
+name: "@gracefullight/rssify"
+description: "Create RSS feed from a web page"
+author: "gracefullight"
+
+inputs:
+  TITLE:
+    description: "Title of the RSS feed"
+    required: true
+  SUBTITLE:
+    description: "Subtitle of the RSS feed"
+  URL:
+    description: "URL of the web page to create RSS feed from"
+    required: true
+  AUTHOR_URL:
+    description: "Author URL of the RSS feed"
+  AUTHOR_NAME:
+    description: "Author name of the RSS feed"
+  AUTHOR_EMAIL:
+    description: "Author email of the RSS feed"
+  COPYRIGHT:
+    description: "Copyright of the RSS feed"
+  LANGUAGE:
+    description: "Language of the RSS feed"
+  ITEM_TITLE_CSS:
+    description: "CSS selector for item title elements"
+    required: true
+  ITEM_URL_CSS:
+    description: "CSS selector for item URL elements"
+    required: true
+  ITEM_DATE_CSS:
+    description: "CSS selector for item date elements"
+    required: true
+  ITEM_AUTHOR_CSS:
+    description: "CSS selector for item author elements"
+  ITEM_DESCRIPTION_CSS:
+    description: "CSS selector for item description elements"
+  ITEM_IMAGE_CSS:
+    description: "CSS selector for item image elements"
+  ITEM_DATE_FORMAT:
+    description: "Date format for the item date elements"
+  ITEM_TIMEZONE:
+    description: "Timezone for the item date elements"
+  FILENAME:
+    description: "Name of the generated RSS feed file"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: "18"
+    - name: Build
+      run: yarn && yarn build
+      shell: bash
+    - name: Generate RSS
+      run: yarn node ${{ github.action_path }}/dist/rssify.js
+      shell: bash
+    - name: Store RSS files in the repo
+      run: |
+        # git commit if there's any change
+        if test -n "$(git status --porcelain 2>/dev/null)"; then
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "github-actions[bot]"
+          git add .
+          git commit -m "chore: 🛰️ update RSS file"
+          git push origin ${GITHUB_REF##*/}
+        fi
+      shell: bash
+
+branding:
+  icon: "rss"
+  color: "green"

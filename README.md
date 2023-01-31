@@ -21,7 +21,7 @@ jobs:
 
     steps:
     - name: Generate Atom Feed
-      uses: gracefullight/rssify@v0.1.0
+      uses: @gracefullight/rssify@v0.1.0
       with:
         TITLE: <feed title>
         URL: <target website URL>
