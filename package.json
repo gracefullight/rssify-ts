@@ -1,4 +1,32 @@
 {
-  "name": "rssify-ts",
-  "packageManager": "yarn@4.0.0-rc.36"
+  "name": "@gracefullight/rssify",
+  "license": "MIT",
+  "author": {
+    "name": "gracefullight",
+    "email": "gracefullight.dev@gmail.com"
+  },
+  "scripts": {
+    "start": "node -r @swc/register src/rssify.ts",
+    "build": "swc src/rssify.ts -d dist"
+  },
+  "packageManager": "yarn@3.3.1",
+  "engines": {
+    "node": "18"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
+    "feed": "^4.2.2",
+    "jsdom": "^21.1.0",
+    "luxon": "^3.2.1"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.60",
+    "@swc/core": "^1.3.31",
+    "@swc/register": "^0.1.10",
+    "@types/jsdom": "^20.0.1",
+    "@types/luxon": "^3.2.0",
+    "@types/node": "^18.11.18",
+    "typescript": "^4.9.5"
+  }
 }
