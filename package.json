@@ -6,7 +6,7 @@
     "email": "gracefullight.dev@gmail.com"
   },
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky",
     "start": "node -r @swc/register src/rssify.ts",
     "build": "swc src/rssify.ts -d dist",
     "lint": "rome check src/*"
@@ -31,8 +31,8 @@
     "@types/jsdom": "^20.0.1",
     "@types/luxon": "^3.2.0",
     "@types/node": "^18.11.18",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.1.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
     "rome": "^11.0.0",
     "typescript": "^4.9.5"
   }
