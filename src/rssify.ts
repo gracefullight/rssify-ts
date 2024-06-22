@@ -1,4 +1,4 @@
-import fs from "fs/promises";
+import fs from "node:fs/promises";
 
 import * as core from "@actions/core";
 import { JSDOM } from "jsdom";
